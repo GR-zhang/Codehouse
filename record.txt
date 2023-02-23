@@ -1,0 +1,48 @@
+模版语法
+	1.文本插值："Mustache"语法 {{  }}   原始html：v-html
+	2.属性绑定：：class  ：style  组件传递属性
+	3.条件渲染：v-if v-show 
+	4.列表渲染： v-for 
+		<li v-for=" item in items" :key=" item.message">
+		{{item.message}}
+		</li>
+	5.事件处理： @click=""
+	6.表单输入绑定： v-model
+	
+选项对象
+	data 
+	methods	//
+	computed //计算属性  setter
+	watch //侦听属性
+	生命周期钩子：created mounted
+	---------
+	ref="?Ref" this.$refs.?Ref
+
+组件注册
+	全局与局部注册
+	全局：Vue.component('',{})
+	局部:
+
+props
+	1、prop命名规则
+	2、怎么定义prop
+	3、prop类型校验
+		props: {
+			msg: {
+				type: String,// 数据类型
+				required: true,// 必填
+				default: '2222'// 默认，若是数组、对象需要一个函数并返回默认值
+			}
+		}
+	4、单向数据流
+
+自定义事件
+	1、命名规则
+	2、发射事件与监听事件
+		$emit('get-data', goodlist)
+		@get-data="getData"
+	3、.sync修饰符、v-model 
+插槽
+  1、仅一个插槽？slot、后备内容、插槽内容、编译作用域
+	2、具名插槽(多个插槽如何实现？)
+	3、作用域插槽： 想把一些数据传给父组件使用

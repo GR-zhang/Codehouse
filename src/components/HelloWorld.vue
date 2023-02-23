@@ -1,31 +1,18 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+
+    <slot name="header" :goodlist="goodlist" />
+
+    <h1 @click="handleclick">{{ syncedvalue }}</h1>
+    <el-button @click="() => { $emit('get-data', goodlist) }">发射事件</el-button>
+    <el-button @click="syncedvalue = '2222' ">修改msg</el-button>
+
+
+    <hr>
+    插槽
+    <slot />
+    <hr>
+
   </div>
 </template>
 
@@ -33,7 +20,31 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    value: {
+      type: String,
+      // required: true,
+      default: '2222'
+    },
+  
+  },
+  data() {
+    return {
+      goodlist: [1, 2, 3]
+    }
+  },
+  methods: {
+    hello() {
+      console.log('子组件hello');
+    },
+    handleclick() {
+      this.value = '222222';
+    }
+  },
+  computed: {
+    syncedvalue: {
+      get() { return this.value },
+      set(val) { this.$emit('input', val) }
+    }
   }
 }
 </script>
